@@ -1,0 +1,146 @@
+{
+  "data": {
+    "users": [
+      {
+        "first_name": "Ivan",
+        "last_name": "Seidel",
+        "createdAt": "2013-11-15T14:54:41.315Z",
+        "updatedAt": "2013-11-15T14:54:41.315Z",
+        "id": 1
+      }
+    ],
+    "teams": [
+      {
+        "name": "Team 1",
+        "country": "ae",
+        "createdAt": "2013-11-18T21:41:08.098Z",
+        "updatedAt": "2013-11-18T21:41:08.098Z",
+        "id": 15
+      },
+      {
+        "name": "Team 2",
+        "country": "af",
+        "createdAt": "2013-11-18T21:41:08.099Z",
+        "updatedAt": "2013-11-18T21:41:08.099Z",
+        "id": 16
+      },
+      {
+        "name": "Team 3",
+        "country": "ag",
+        "createdAt": "2013-11-18T21:41:08.099Z",
+        "updatedAt": "2013-11-18T21:41:08.099Z",
+        "id": 17
+      },
+      {
+        "name": "Team 4",
+        "country": "ai",
+        "createdAt": "2013-11-18T21:41:08.100Z",
+        "updatedAt": "2013-11-18T21:41:08.100Z",
+        "id": 18
+      },
+      {
+        "name": "Team 5",
+        "country": "al",
+        "createdAt": "2013-11-18T21:41:08.102Z",
+        "updatedAt": "2013-11-18T21:41:08.102Z",
+        "id": 19
+      },
+      {
+        "name": "Team 6",
+        "country": "am",
+        "createdAt": "2013-11-18T21:41:08.102Z",
+        "updatedAt": "2013-11-18T21:41:08.102Z",
+        "id": 20
+      },
+      {
+        "name": "Team 7",
+        "country": "an",
+        "createdAt": "2013-11-18T21:41:08.102Z",
+        "updatedAt": "2013-11-18T21:41:08.102Z",
+        "id": 21
+      },
+      {
+        "name": "Team 8",
+        "country": "ao",
+        "createdAt": "2013-11-18T21:41:08.103Z",
+        "updatedAt": "2013-11-18T21:41:08.103Z",
+        "id": 22
+      },
+      {
+        "name": "Team 9",
+        "country": "aq",
+        "createdAt": "2013-11-18T21:41:08.104Z",
+        "updatedAt": "2013-11-18T21:41:08.104Z",
+        "id": 23
+      }
+    ]
+  },
+  "schema": {
+    "users": {
+      "first_name": {
+        "type": "string"
+      },
+      "last_name": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    },
+    "teams": {
+      "name": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string"
+      },
+      "country": {
+        "type": "string"
+      },
+      "state": {
+        "type": "string"
+      },
+      "city": {
+        "type": "string"
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "datetime",
+        "default": "NOW"
+      }
+    }
+  },
+  "counters": {
+    "users": {
+      "id": 1
+    },
+    "teams": {
+      "id": 23
+    }
+  }
+}
