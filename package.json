@@ -10,5 +10,11 @@
     "ejs": "*",
     "colors": "*",
     "lodash": "*",
+
+    "sails-disk": "*",
+    "waterline": "*",
+
+    "easy-admin": "*"
+
   }
 }
