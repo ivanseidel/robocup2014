@@ -2,6 +2,7 @@
 ################
 node_modules/
 easy-admin/
+.tmp/
 
 # Compiled source #
 ###################
