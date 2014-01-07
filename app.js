@@ -14,6 +14,10 @@ var Teams = require('./teams');
 var TeamsController = Teams.Controller;
 var Team = Teams.Model;
 
+var Matches = require('./matches');
+var MatchesController = Matches.Controller;
+var Match = Matches.Model;
+
 var Waterline = require('waterline');
 var adapter = require('sails-disk');
 
@@ -24,9 +28,12 @@ app.set('port', process.env.PORT || 3000);
 
 // Tournament
 var tournament = new CMS.Controller();
+
 var teamsModel;
 var teamsModelCollection;
 var teamsController;
+
+var matchesController;
 
 function afterLoad(err, collection){
 	// console.log(collection);
@@ -36,6 +43,13 @@ function afterLoad(err, collection){
 		editAttributes: ['id', 'country', 'name'],
 		model: collection
 	});
+	tournament.use(teamsController);
+
+	matchesController = new MatchesController({
+		modelName: 'Team',
+		model: collection,
+	});
+	tournament.use(matchesController);
 
 	// var countries = ['ad','ae','af','ag','ai','al','am','an','ao','aq','ar'];
 
@@ -45,7 +59,6 @@ function afterLoad(err, collection){
 			// console.log(err);
 		// });
 
-	tournament.use(teamsController);
 
 	initCMS();
 }

@@ -3,7 +3,6 @@
  */
 var Waterline = require('waterline');
 var _ = require('lodash');
-var Team = require('./team');
 
 /**
  * Expose 'TeamController' constructor
@@ -13,7 +12,7 @@ module.exports.Controller = TeamController;
 /**
  * Expose 'Team' Model
  */
-module.exports.Model = Waterline.Collection.extend({
+var Team = Waterline.Collection.extend({
 
 	adapter: 'default',
 
@@ -31,6 +30,8 @@ module.exports.Model = Waterline.Collection.extend({
 	}
 
 });
+
+module.exports.Model = Team;
 
 /**
  * TeamController Module Controller
