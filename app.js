@@ -10,8 +10,9 @@ var ejs = require('ejs');
 
 var CMS = require('./easy-admin');
 
-var TeamsController = require('./teams');
-var Team = require('./team');
+var Teams = require('./teams');
+var TeamsController = Teams.Controller;
+var Team = Teams.Model;
 
 var Waterline = require('waterline');
 var adapter = require('sails-disk');

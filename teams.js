@@ -1,17 +1,39 @@
 /**
  * Module dependencies.
  */
+var Waterline = require('waterline');
 var _ = require('lodash');
 var Team = require('./team');
 
 /**
  * Expose 'TeamController' constructor
  */
-module.exports = TeamController;
-
+module.exports.Controller = TeamController;
 
 /**
- * TeamController Module constructor
+ * Expose 'Team' Model
+ */
+module.exports.Model = Waterline.Collection.extend({
+
+	adapter: 'default',
+
+	attributes: {
+		id: {type: 'string'},
+
+		name: 'string',
+		category: 'string',
+
+		country: 'string',
+		state: 'string',
+		city: 'string',
+
+		active: 'boolean',
+	}
+
+});
+
+/**
+ * TeamController Module Controller
  */
 function TeamController(modelConfig){
 

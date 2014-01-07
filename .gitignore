@@ -41,3 +41,4 @@ easy-admin/
 .Trashes
 ehthumbs.db
 Thumbs.db
+.tmp/disk.db
