@@ -79,7 +79,6 @@ function TeamController(modelConfig){
 		// Refresh badge to show current teams number
 		self.teams.count().exec(function(err, count){
 			self.viewMenu.badge = count;
-			self.menuItems[0].badge = count;
 		});
 	}
 
@@ -89,7 +88,7 @@ function TeamController(modelConfig){
 
 	// Cached menuItems
 	this.menuItems = [
-		{name: 'Teams', path: '/teams', badge: '19'}
+		{name: 'Teams', path: '/teams'}
 	];
 
 	this.viewMenu = {
