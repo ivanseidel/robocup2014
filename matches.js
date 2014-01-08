@@ -34,10 +34,23 @@ module.exports.Group = Group;
 /**
  * TeamController Module Controller
  */
-function MatchesController(modelConfig){
+function MatchesController(options){
 
 	// Global access to self class
 	var self = this;
+
+	self._defaults = {
+		teams: false,
+	};
+
+	// Setup default options
+	for(k in self._defaults)
+		self[k] = self._defaults[k];
+
+	// Set options
+	for(k in options)
+		self[k] = options[k];
+
 	
 	// Data about this Object
 	this.name = 'Matches Controller';
@@ -104,9 +117,35 @@ function MatchesController(modelConfig){
 		self.cms.renderWithView(res, __dirname+'/public/manage.ejs', data);
 	}
 
+	this.teamlist = function(req, res){
+
+		self.teams.find(afterFind);
+
+		function afterFind(err, data){
+			var teamList = [];
+			var query = (req.param('query') || '').toLowerCase();
+
+			for(k in data){
+				team = data[k]
+				var insert = 
+				{
+					id: team.id,
+					text: '('+team.id + ') '+data[k].name
+				};
+
+				if(insert.text.toLowerCase().indexOf(query) >= 0)
+					teamList.push(insert);
+			}
+
+			res.send(teamList);
+		}
+	}
+
 	// Routes
 	this.routes = [
 		{path: '/groups', callback: self.manage},
+
+		{path: '/groups/teamlist', callback: self.teamlist}
 	];
 
 

@@ -46,8 +46,7 @@ function afterLoad(err, collection){
 	tournament.use(teamsController);
 
 	matchesController = new MatchesController({
-		modelName: 'Team',
-		model: collection,
+		teams: collection,
 	});
 	tournament.use(matchesController);
 
