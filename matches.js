@@ -68,19 +68,19 @@ function MatchesController(modelConfig){
 	// Collection
 	this.groups = null;
 
-	this.onLoad = function(err, collection){
-		if(err){
-			console.log('Failed to Initialized Groups model'.red);
-			console.log(err);
-			return;
-		}
+	// this.onLoad = function(err, collection){
+	// 	if(err){
+	// 		console.log('Failed to Initialized Groups model'.red);
+	// 		console.log(err);
+	// 		return;
+	// 	}
 
-		console.log('Initialized Groups model'.green);
+	// 	console.log('Initialized Groups model'.green);
 
-		self.groups = collection;
+	// 	self.groups = collection;
 
-		self.afterRefresh();
-	}
+	// 	self.afterRefresh();
+	// }
 
 	/*************************************************
 	 					Views
