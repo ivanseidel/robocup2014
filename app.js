@@ -59,8 +59,13 @@ function afterLoad(err, collection){
 			// console.log(err);
 		// });
 
-
 	initCMS();
+	
+	// CMS.REST({
+	// 	model: collection,
+	// 	basePath: '/teste',
+	// 	app: tournament,
+	// });
 }
 
 function initCMS(){
