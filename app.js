@@ -8,7 +8,7 @@ var path = require('path');
 // var colors = require('colors');
 var ejs = require('ejs');
 
-var CMS = require('./easy-admin');
+var CMS = require('easy-admin');
 
 var Teams = require('./teams');
 var TeamsController = Teams.Controller;
