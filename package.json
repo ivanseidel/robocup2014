@@ -14,7 +14,7 @@
     "sails-disk": "*",
     "waterline": "*",
 
-    "easy-admin": "*"
+    "easy-admin": "0.0.2"
 
   }
 }
