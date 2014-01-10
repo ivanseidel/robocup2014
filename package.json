@@ -12,6 +12,7 @@
     "lodash": "*",
 
     "sails-disk": "*",
+    "sails-mongo": "*",
     "waterline": "*",
 
     "easy-admin": "0.0.6"

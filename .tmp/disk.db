@@ -42,6 +42,11 @@
         "createdAt": "2014-01-10T08:00:22.728Z",
         "updatedAt": "2014-01-10T08:00:22.728Z",
         "id": 6
+      },
+      {
+        "createdAt": "2014-01-10T12:03:57.488Z",
+        "updatedAt": "2014-01-10T12:03:57.488Z",
+        "id": 7
       }
     ],
     "groups": [
@@ -56,6 +61,12 @@
         "createdAt": "2014-01-10T08:02:25.616Z",
         "updatedAt": "2014-01-10T08:02:29.093Z",
         "id": 3
+      },
+      {
+        "name": "A",
+        "createdAt": "2014-01-10T12:03:41.299Z",
+        "updatedAt": "2014-01-10T22:37:08.074Z",
+        "id": 4
       }
     ],
     "matches": [
@@ -142,6 +153,34 @@
         "createdAt": "2014-01-10T08:03:13.843Z",
         "updatedAt": "2014-01-10T08:03:26.656Z",
         "id": 6
+      },
+      {
+        "groupId": 1,
+        "teamAId": null,
+        "teamAScore": 0,
+        "teamBId": null,
+        "teamBScore": 0,
+        "state": "scheduled",
+        "day": 1,
+        "hour": "12:00",
+        "field": "Ç",
+        "createdAt": "2014-01-10T12:03:16.536Z",
+        "updatedAt": "2014-01-10T12:03:16.536Z",
+        "id": 7
+      },
+      {
+        "groupId": 1,
+        "teamAId": null,
+        "teamAScore": 0,
+        "teamBId": null,
+        "teamBScore": 0,
+        "state": "scheduled",
+        "day": 1,
+        "hour": "12:00",
+        "field": "Ç",
+        "createdAt": "2014-01-10T12:03:32.571Z",
+        "updatedAt": "2014-01-10T12:03:32.571Z",
+        "id": 8
       }
     ]
   },
@@ -257,13 +296,13 @@
   },
   "counters": {
     "teams": {
-      "id": 6
+      "id": 7
     },
     "groups": {
-      "id": 3
+      "id": 4
     },
     "matches": {
-      "id": 6
+      "id": 8
     }
   }
 }

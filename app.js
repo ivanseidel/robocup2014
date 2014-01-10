@@ -7,8 +7,9 @@ var http = require('http');
 var path = require('path');
 // var colors = require('colors');
 var ejs = require('ejs');
+var _ = require('lodash');
 
-var CMS = require('easy-admin');
+var CMS = require('./easy-admin');
 
 var Teams = require('./teams');
 var TeamsController = Teams.Controller;
@@ -17,8 +18,13 @@ var Matches = require('./matches');
 var MatchesController = Matches.Controller;
 
 var Waterline = require('waterline');
-var adapter = require('sails-disk');
+var adapter = require('sails-mongo');
 // var adapter = require('sails-disk');
+adapter.config = {url: 'mongodb://heroku:heroku@dharma.mongohq.com:10036/app19376820'};
+// var adapter = {
+	// module: 'sails-mongo',
+	// url: 'mongodb://heroku:heroku@dharma.mongohq.com:10036/app19376820',
+// }
 
 // Setup Express
 var app = express();
