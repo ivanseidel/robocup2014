@@ -6,7 +6,7 @@ var _ = require('lodash');
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
-var REST = require('./easy-admin').REST;
+var REST = require('easy-admin').REST;
 
 /**
  * Expose 'TeamController' constructor
