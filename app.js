@@ -18,6 +18,7 @@ var MatchesController = Matches.Controller;
 
 var Waterline = require('waterline');
 var adapter = require('sails-disk');
+// var adapter = require('sails-disk');
 
 // Setup Express
 var app = express();
