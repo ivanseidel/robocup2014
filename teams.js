@@ -17,8 +17,6 @@ var Team = Waterline.Collection.extend({
 	adapter: 'default',
 
 	attributes: {
-		id: {type: 'string'},
-
 		name: 'string',
 		category: 'string',
 
