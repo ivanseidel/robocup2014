@@ -45,10 +45,13 @@ var Match = Waterline.Collection.extend({
 	attributes: {
 		// id: {type: 'int'},
 
-		groupId: 'int',
+		groupId: {
+			type: 'string',
+			required: true,
+		},
 
 		teamAId: {
-			type: 'integer',
+			type: 'string',
 			defaultsTo: null,
 		},
 		teamAScore: {
@@ -56,7 +59,7 @@ var Match = Waterline.Collection.extend({
 			defaultsTo: 0,
 		},
 		teamBId: {
-			type: 'integer',
+			type: 'string',
 			defaultsTo: null,
 		},
 		teamBScore: {
@@ -319,7 +322,7 @@ function MatchesController(options){
 					text: data[k].name
 				};
 
-				if(insert.text.toLowerCase().indexOf(query) >= 0)
+				if((insert.text || '').toLowerCase().indexOf(query) >= 0)
 					teamList.push(insert);
 			}
 
