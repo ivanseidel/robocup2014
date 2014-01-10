@@ -13,6 +13,9 @@
 <!-- select2 bootstrap -->
 <link href="/assets/select2/select2-bootstrap.css" rel="stylesheet">
 
+<!-- Custom utility -->
+<script src="/js/util.js"></script>  
+
 <style type="text/css">
 
 .match-state{
@@ -246,119 +249,44 @@ $.fn.editable.defaults.ajaxOptions = {type: "POST"};
 */
 var TeamList = {};
 
-/*
-	Matches MVC
+// /*
+// 	Matches MVC
 
-	Assign null to get all Groups
-*/
+// 	Assign null to get all Groups
+// */
 function GroupController(id){
 	var self = this;
+	// Extend base Model Controller
+	$.extend(this, new ModelController(id, '/groups'));
+	// self.data = {a: 1};
 
-	self.id = id;
-
+	// Change api.find if 'id' is not empy, to find associated
 	if(id)
-		// If id exists, let's get data from associated api
-		self.url = '/groups/associated/'
-	else
-		// Else, let's get it from usual api (no matches or associations)
-		self.url = '/groups/find/'
+		self.api.find = '/associated/';
 
-	self.api = {
-		createMatch: '/groups/matches/create/',
-		destroyMatch: '/groups/matches/destroy/',
-
-		createGroup: '/groups/create/',
-		destroyGroup: '/groups/destroy/',
-	};
-
-	//{
-		// getGroup: '/groups/',
-		// getGroupFull: '/groups/full', // Mixed with Matches
-		// getMatch: '/groups/matches/',
-		// getTeam: '/groups/teams/',
-	// }
-
-	self.data = {};
-
-	// ModelController
-	self.load = function(cb){
-		$.ajax({
-			url: self.url + (self.id || '')
-		}).done(loadComplete);
-
-		function loadComplete(data){
-			// console.log(data);
-			self.data = data;
-
-			if(cb) cb(data); 
-
-			/*if(cb) setTimeout(emulateDelay, 1000); 
-			function emulateDelay(){
-				cb(data);
-			}*/
-		}
-	}
-
-	// Create a new Group with the given data
-	self.create = function(data, cb){
-		data = data || {};
-
-		$.ajax({
-			url: self.api.createGroup,
-			type: 'POST',
-			data: data,
-		}).done(done);
-
-		function done(data){
-			if(cb) cb(data);
-		}
-	}
+	// Matches REST base URL API
+	self.matchesAPI = '/groups/matches';
 
 	// Create a new Match with the given data
 	self.createMatch = function(data, cb){
+		var self = this;
 		data = data || {};
 
 		if(!data.groupId)
-			data.groupId = self.data.id;
+			data.groupId = self.id;
 
-		$.ajax({
-			url: self.api.createMatch,
-			type: 'POST',
-			data: data,
-		}).done(done);
+		var match = new ModelController(null, self.matchesAPI);
+		match.create(data, function(match){
+			self.data.matches.push(match);
 
-		function done(data){
-			// Add match to current data
-			self.data.matches.push(data);
-
-			if(cb) cb(data);
-		}
-	}
-
-	// Destroy this group
-	self.destroy = function(cb){
-		// return cb();
-		$.ajax({
-			url: self.api.destroyGroup + self.data.id,
-			type: 'DELETE',
-		}).done(done);
-
-		function done(data){
-			if(cb) cb(data);
-		}
+			if(cb)cb(match);
+		});
 	}
 
 	// Destroy the match with the given id
 	self.destroyMatch = function(matchId, cb){
-
-		$.ajax({
-			url: self.api.destroyMatch + matchId,
-			type: 'DELETE',
-		}).done(done);
-
-		function done(data){
-			if(cb) cb(data);
-		}
+		var match = new ModelController(matchId, self.matchesAPI);
+		match.destroy(cb);
 	}
 }
 
@@ -467,56 +395,7 @@ function GroupViewController(groupController, onBuild){
 
 	// Tables are not usualy updated, but re-created
 	self.makeTable = function(headers, content, recycle){
-		// Try recycling table if set
-		var $table = (recycle ? recycle : $('#template-table').clone());
-
-		// Make it visible and remove id
-		$table.removeClass('hide');
-		$table.removeAttr('id');
-
-		// Creates thead
-		$thead = $('<thead>');
-
-		// Add Headers
-		var headersCount = 0;
-		$tr = $('<tr>');
-		$thead.append($tr);
-
-		for(var k in headers){
-			$tr.append($('<th>').text(headers[k]));
-			headersCount++;
-		}
-
-		// Creates tbody
-		$tbody = $('<tbody>');
-		
-		// Go trough all contents and adds to table
-		for(var c in content){
-			var rowData = content[c];
-			// console.log(rowData);
-			var $row = $('<tr>');
-
-			// Go through headers and append to table
-			for(var k in headers){
-				var value = Object.byString(rowData,k);
-				$row.append($('<td>').text(value));
-			}
-
-			$tbody.append($row);
-		}
-
-		// Show 'nothing on table' If there is no data
-		if(content.length <= 0){
-			var $row = $('<tr>');
-			$row.append($('<td>').addClass('text-center').attr('colspan', ''+headersCount).text('No data in table'));
-			$tbody.append($row);
-		}
-
-		$table.empty();
-		$table.append($thead);
-		$table.append($tbody);
-
-		return $table;
+		return createTable(headers, content, (recycle ? recycle : $('#template-table').clone()));
 	}
 
 	// Creates a single match entry with configuration
@@ -538,7 +417,8 @@ function GroupViewController(groupController, onBuild){
 		var editableOptionsPopup = {
 			mode: 'popup',
 			url: '/groups/matches/post',
-			pk: match.id
+			pk: match.id,
+			showbuttons: false,
 		}
 		
 		// Editable options inline
@@ -557,6 +437,7 @@ function GroupViewController(groupController, onBuild){
 			url: '/groups/matches/post',
 			source: TeamList,
 			pk: match.id,
+			showbuttons: false,
 			select2: {
 				width: 200,
 				placeholder: 'Select Team',
