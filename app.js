@@ -12,11 +12,9 @@ var CMS = require('easy-admin');
 
 var Teams = require('./teams');
 var TeamsController = Teams.Controller;
-var Team = Teams.Model;
 
 var Matches = require('./matches');
 var MatchesController = Matches.Controller;
-var Match = Matches.Model;
 
 var Waterline = require('waterline');
 var adapter = require('sails-disk');
@@ -35,18 +33,69 @@ var teamsController;
 
 var matchesController;
 
-function afterLoad(err, collection){
-	// console.log(collection);
+
+var models = {
+	teams: null,
+	groups: null,
+	matches: null,
+};
+
+// Helper used to save the loaded model and go to next action
+function saveModel(model, next){
+	return function(err, collection){
+		if(err){
+			console.log('FAILED TO LOAD MODEL '.red + model.cyan);
+		}else{
+			console.log('MODEL LOADED: '.green + model.cyan);
+			models[model] = collection;
+		}
+
+		next();
+	}
+}
+
+function startLoading(){
+	console.log('START LOADING MODELS...'.green);
+	loadTeams();
+}
+
+function loadTeams(){
+	// Loads Teams
+	var Team = Teams.Model;
+	models.teams = new Team({ adapters: {default: adapter}, tableName: 'teams' }, saveModel('teams', loadGroups));
+}
+
+function loadGroups(){
+	// Loads Group 
+	var Group = Matches.Group;
+	models.groups = new Group({ adapters: {default: adapter}, tableName: 'groups' }, saveModel('groups', loadMatches));
+}
+
+function loadMatches(){
+	// Loads Matches
+	var Match = Matches.Match;
+	models.matches = new Match({ adapters: {default: adapter}, tableName: 'matches' }, saveModel('matches', finishLoading));
+}
+
+function finishLoading(){
+	console.log('FINISHED MODEL LOADING'.green);
+
+	loadCMS();
+}
+
+function loadCMS(){
 	teamsController = new CMS.ModelViewController({
 		modelName: 'Team',
 		listAttributes: ['id', 'country', 'name'],
 		editAttributes: ['id', 'country', 'name'],
-		model: collection
+		model: models.teams
 	});
 	tournament.use(teamsController);
 
 	matchesController = new MatchesController({
-		teams: collection,
+		teams: models.teams,
+		groups: models.groups,
+		matches: models.matches,
 	});
 	tournament.use(matchesController);
 
@@ -58,43 +107,20 @@ function afterLoad(err, collection){
 			// console.log(err);
 		// });
 
-	initCMS();
-	
-	// CMS.REST({
-	// 	model: collection,
-	// 	basePath: '/teste',
-	// 	app: tournament,
-	// });
-}
-
-function initCMS(){
 
 	// Teams ModelViewController initialization
 
 	// CMS initialization
 	tournament.initialize({
 		name: 'Tournament Manager',
-		modelName: 'Team',
 		app: app,
 	});
 
-	console.log(teamsModel)
-
 	http.createServer(app).listen(app.get('port'), function(){
-	  console.log('Express server listening on port ' + app.get('port'));
+	  console.log('Express server listening on port '.cyan + app.get('port'));
 	});
 }
-
-
-// Team Controller
-// var teamsController = new TeamsController({ adapters: {default: adapter}, tableName: 'teams' });
-// tournament.use(teamsController);
-
-var teamsModel = new Team({ adapters: {default: adapter}, tableName: 'teams' }, afterLoad);
-
-// var teamsController = new CMS.ModelViewController({modelName: 'Team'});
-// tournament.use(teamsController);
-
+startLoading();
 
 
 
