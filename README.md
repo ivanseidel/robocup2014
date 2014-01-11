@@ -6,7 +6,7 @@ Robocup 2014 Administration panel for leagues
 Setting up a development environment
 ====================================
 
-0. Install nodejs and npm on your machine.
+0. Install [nodejs](http://howtonode.org/how-to-install-nodejs) and [npm](http://howtonode.org/introduction-to-npm) on your machine.
 
 1. Clone this repository by running
 
