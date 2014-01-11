@@ -1,10 +1,8 @@
 
-module.exports = function isNiceToAnimals (req, res, next) {
+module.exports = function useEasyAdmin (req, res, next) {
 
 	res.view = view(res.view, res);
-	console.log(res.view);
-
-
+	// console.log(res.view);
 
 	return next();
 };

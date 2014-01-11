@@ -1,5 +1,5 @@
 /**
- * MatchesController
+ * MatchController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,9 +16,10 @@
  */
 
 module.exports = {
-    
-  
 
+	post: function (req, res, next) {
+		return XEditable.handle(Match)(req, res, next);
+	},
 
   /**
    * Overrides for the settings in `config/controllers.js`

@@ -14,6 +14,8 @@ module.exports.bootstrap = function (cb) {
 
 	initializeEasyAdmin();
 
+	// initializeXEditable();
+
 	// It's very important to trigger this callack method when you are finished 
 	// with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
 	cb();
@@ -31,7 +33,7 @@ function initializeEasyAdmin(){
 
 	// console.log(sails.controllers);
 	// sails.express.app.locals();
-	console.log(sails.config.appName);
+	// console.log(sails.config.appName);
 
 	// Search in every controller
 	_.each(sails.controllers, function(controller){
@@ -43,3 +45,19 @@ function initializeEasyAdmin(){
 	sails.express.app.locals(constantLocals);
 
 }
+
+
+/*function initializeXEditable(){
+	// console.log(sails.models);
+	_.each(sails.controllers, function(controller){
+		console.log(controller);
+
+		var Model = sails.models[controller.identity];
+
+		// if(Model)
+			// controller['asdasd'] = XEditable.handle(controller);
+
+
+	});
+}
+*/

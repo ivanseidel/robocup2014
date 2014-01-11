@@ -11,7 +11,7 @@ function ModelController(id, urlBase){
 
 	self.api = {
 		find: '/find/',
-		create: '/create/',
+		create: '/create',
 		destroy: '/destroy/',
 	};
 

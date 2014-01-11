@@ -265,7 +265,7 @@ function GroupController(id){
 		self.api.find = '/associated/';
 
 	// Matches REST base URL API
-	self.matchesAPI = '/groups/matches';
+	self.matchesAPI = '/matches';
 
 	// Create a new Match with the given data
 	self.createMatch = function(data, cb){
@@ -416,7 +416,7 @@ function GroupViewController(groupController, onBuild){
 		// Editable options popup
 		var editableOptionsPopup = {
 			mode: 'popup',
-			url: '/groups/matches/post',
+			url: '/matches/post',
 			pk: match.id,
 			showbuttons: false,
 		}
@@ -424,7 +424,7 @@ function GroupViewController(groupController, onBuild){
 		// Editable options inline
 		var editableOptionsInline = {
 			mode: 'popup',
-			url: '/groups/matches/post',
+			url: '/matches/post',
 			pk: match.id,
 			showbuttons: false,
 			emptytext: '&nbsp',
@@ -434,7 +434,7 @@ function GroupViewController(groupController, onBuild){
 		var editableOptionsTeams = {
 			type: 'select2',
 			mode: 'popup',
-			url: '/groups/matches/post',
+			url: '/matches/post',
 			source: TeamList,
 			pk: match.id,
 			showbuttons: false,
@@ -449,7 +449,7 @@ function GroupViewController(groupController, onBuild){
 		var editableOptionState = {
 			type: 'select',
 			mode: 'popup',
-			url: '/groups/matches/post',
+			url: '/matches/post',
 			source: [
 				{value: 'scheduled', text: 'Scheduled'},
 				{value: 'playing', text: 'Playing'},
@@ -766,7 +766,7 @@ $(document).ready(function() {
 			// Creates a new model in database
 			groups.create({}, function(newGroup){
 				// Adds to the current page
-				console.log(newGroup);
+				// console.log(newGroup);
 
 				initializeGroup(newGroup.id, animateCreation);
 			});
