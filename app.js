@@ -9,7 +9,7 @@ var path = require('path');
 var ejs = require('ejs');
 var _ = require('lodash');
 
-var CMS = require('./easy-admin');
+var CMS = require('easy-admin');
 
 var Teams = require('./teams');
 var TeamsController = Teams.Controller;
